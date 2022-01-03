@@ -49,3 +49,7 @@ func main()
 	fmt.Println("Hello, world")
 }
 ```
+
+## Installing Go
+
+To install Go on your machine click [here](https://go.dev/dl/). This link will take you to the download section to install all necessary packages and libraries on your system.
