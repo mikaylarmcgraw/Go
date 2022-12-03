@@ -39,9 +39,11 @@ func readInputValues() []Round {
 	//scanning file for next line
 	for scanner.Scan() {
 		input := scanner.Text()
-		v1, v2 := strings.Split(input, " ")
+		inputArray := strings.Split(input, " ")
+		v1 := inputArray[0]
+		v2 := inputArray[1]
 		fmt.Println("Opponent value: ", v1, " My Choice: ", v2)
-		round := Round{v1, v2, "", 0}
+		round := Round{v1, "", "", 0}
 		list = append(list, round)
 	}
 
