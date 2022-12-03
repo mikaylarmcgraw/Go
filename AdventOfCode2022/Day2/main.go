@@ -10,7 +10,7 @@ import (
 type Round struct {
 	opponentChoice string
 	myChoice       string
-	outCome        string
+	outcome        string
 	points         int32
 }
 
@@ -22,7 +22,11 @@ func main() {
 	//calculate points based on your player selection
 	roundList = calculateChoicePoints(roundList)
 	//calculate outcome of game and adjust points accordingly
+	roundList = roundOutcomeCalculator(roundList)
 
+	for i := range roundList {
+		fmt.Println("Results: ", roundList[i].outcome)
+	}
 }
 
 func readInputValues() []Round {
@@ -74,5 +78,51 @@ func calculateChoicePoints(list []Round) []Round {
 		}
 	}
 
+	return list
+}
+
+func roundOutcomeCalculator(list []Round) []Round {
+
+	for i, v := range list {
+
+		switch list[i].myChoice {
+
+		// I choose rock
+		case "X":
+
+			if v.opponentChoice == "B" {
+				list[i].outcome = "lose" //opponent chooses paper
+			}
+			if v.opponentChoice == "C" {
+				list[i].outcome = "win" //opponent chooses scissors
+			}
+			if v.opponentChoice == "A" {
+				list[i].outcome = "tie" //opponent chooses rock
+			}
+
+		//I choose paper
+		case "Y":
+			if v.opponentChoice == "A" {
+				list[i].outcome = "win" //opponent chooses rock
+			}
+			if v.opponentChoice == "C" {
+				list[i].outcome = "lose" //opponent chooses scissors
+			}
+			if v.opponentChoice == "B" {
+				list[i].outcome = "tie" //opponent chooses paper
+			}
+		//I choose scissors
+		case "Z":
+			if v.opponentChoice == "A" {
+				list[i].outcome = "lose" //opponent chooses rock
+			}
+			if v.opponentChoice == "B" {
+				list[i].outcome = "win" //opponent chooses paper
+			}
+			if v.opponentChoice == "C" {
+				list[i].outcome = "tie" //opponent chooses scissors
+			}
+		}
+	}
 	return list
 }
